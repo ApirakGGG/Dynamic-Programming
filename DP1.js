@@ -14,4 +14,22 @@ const maxSum = (nums) => {
   return dp[nums.length - 1]; // คำตอบคือ dp ตำแหน่งสุดท้าย
 };
 
-// console.log(maxSum(nums)); //anwser 15
+console.log(maxSum(nums)); //anwser 15
+
+// Optimization: Version
+
+const maxSum2 = (nums) => {
+  if (nums.length === 0) return 0;
+  if (nums.lenght === 1) return nums[0];
+
+  let prev1 = Math.max(nums[0], nums[1]); // dp[i -1]
+  let prev2 = nums[0]; // dp[i - 2]
+
+  for (let i = 2; i < nums.length; i++) {
+    const current = Math.max(prev1, nums[i] + prev2);
+    prev2 = prev1;
+    prev1 = current;
+  }
+  return prev1;
+};
+console.log(maxSum2(nums)); //anwser 15
